@@ -84,24 +84,13 @@ OAuth2Strategy.prototype.userProfile = function(accessToken, done) {
   });
 };
 
-let params;
-if(env !== 'dev') {
-  params = {
-    authorizationURL: 'https://auth.swoop.email/oauth2/authorize',
-    tokenURL: 'https://auth.swoop.email/oauth2/token',
-    clientID: 'swoop_7kg2d4k7xgugy1',
-    clientSecret: '3e03f58b5e87e4349de09a5131c8a797f68a22b4925f719d1a1ce61a288a3652',
-    callbackURL: 'http://www.codecrushcrew.com/auth/swoop/callback'
-  }
-} else {
-  params = {
-    authorizationURL: 'https://auth.swoop.email/oauth2/authorize',
-    tokenURL: 'https://auth.swoop.email/oauth2/token',
-    clientID: 'swoop_7kg2d4k7xgugy1',
-    clientSecret: '3e03f58b5e87e4349de09a5131c8a797f68a22b4925f719d1a1ce61a288a3652',
-    callbackURL: 'https://brandon_swoop.ngrok.io/auth/swoop/callback'
-  }
-}
+let params = {
+  authorizationURL: process.env.AUTH_URL,
+  tokenURL: process.env.TOKEN_URL,
+  clientID: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET,
+  callbackURL: `${process.env.CALLBACK_URL}/auth/swoop/callback`
+};
 
 passport.use('swoop', new OAuth2Strategy(params, function(accessToken, refreshToken, profile, done) {
   done(null, profile);
