@@ -1,5 +1,4 @@
 <!-- Masthead-->
-
 <section class="page-section bg-dark" id="sign-in">
     <div class="container">
         <div class="row justify-content-center">
@@ -8,97 +7,104 @@
     </div>
 </section>
 
-<% if(lessons.length === 0) { %>
-  <div class="alert alert-warning">
-    <strong>Lessons coming soon.</strong>
-    <p>We haven't added any lessons just yet, please check back shortly.</p>
-  </div>
-<% } %>
-
-<% if(isAdmin) { %>
-  <div class="row text-left">
-    <div class="col-lg-6 col-md-4 mb-4">
-    <form method="post" action="/lessons" novalidate>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Title</label>
-        <input type="text" class="form-control" name="title" id="title" aria-describedby="emailHelp" placeholder="Enter title">
-        <small id="emailHelp" class="form-text text-muted">This is the title of your lesson.</small>
+<div class="container">
+  <% if(lessons.length === 0) { %>
+    <div class="row text-center">
+      <div class="col-lg-12 col-md-12 mb-12">
+        <div class="alert alert-warning">
+          <strong>Lessons coming soon.</strong>
+          <p>We haven't added any lessons just yet, please check back shortly.</p>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">URL</label>
-        <input type="text" class="form-control" name="url"  id="url" placeholder="URL of embed">
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Sort Order</label>
-        <input type="number" class="form-control" name="sort"  id="sort" placeholder="Sort order">
-        <small id="emailHelp" class="form-text text-muted">This is a numeric value</small>
-      </div>
-      <div class="form-group">
-        <label for="exampleFormControlTextarea1">Description</label>
-        <textarea class="form-control" name="description"  id="description" rows="3"></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary">Add Lesson</button>
-    </form>
     </div>
-  </div>
-<% } %>
+  <% } %>
 
-<% if(!isAdmin) { %>
-  <div class="row text-center">
-<% } else { %>
-  <div class="row text-left">
-<% } %>
-
-<% lessons.forEach(function(lesson){ %>
+  <% if(isAdmin) { %>
+    <div class="row text-left">
+      <div class="col-lg-6 col-md-4 mb-4">
+      <form method="post" action="/lessons" novalidate>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Title</label>
+          <input type="text" class="form-control" name="title" id="title" aria-describedby="emailHelp" placeholder="Enter title">
+          <small id="emailHelp" class="form-text text-muted">This is the title of your lesson.</small>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">URL</label>
+          <input type="text" class="form-control" name="url"  id="url" placeholder="URL of embed">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Sort Order</label>
+          <input type="number" class="form-control" name="sort"  id="sort" placeholder="Sort order">
+          <small id="emailHelp" class="form-text text-muted">This is a numeric value</small>
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Description</label>
+          <textarea class="form-control" name="description"  id="description" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Lesson</button>
+      </form>
+      </div>
+    </div>
+  <% } %>
 
   <% if(!isAdmin) { %>
-
-    <!-- Project One -->
-        <div class="row">
-          <div class="col-md-7">
-              <iframe class="embed-responsive-item" src="<%= lesson.url %>" allowfullscreen></iframe>
-          </div>
-          <div class="col-md-5">
-            <h3><%= lesson.title %></h3>
-            <p><%= lesson.description %></p>
-            <p>Posted <%= moment(lesson.createdAt).format('MMMM Do YYYY'); %></p>
-          </div>
-        </div>
-        <!-- /.row -->
-
+    <div class="row text-center">
   <% } else { %>
-    <div class="col-lg-3 col-md-6 mb-4">
-      <div class="card h-100">
-        <form method="POST" action="/lessons/<%= lesson._id %>">
-          <input type="hidden" name="_method" value="put" />
-          <div class="card-img-top embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="<%= lesson.url %>" allowfullscreen></iframe>
-          </div>
+    <div class="row text-left">
+  <% } %>
 
-          <div class="card-body">
-            <label for="exampleInputEmail1">URL</label>
-            <input value="<%= lesson.url %>" type="text" class="form-control" name="url" id="url" aria-describedby="emailHelp">
-            <label for="exampleInputEmail1">Title</label>
-            <input value="<%= lesson.title %>" type="text" class="form-control" name="title" id="title" aria-describedby="emailHelp" placeholder="Enter title" >
-            <label for="exampleInputEmail1">Sort Order</label>
-            <input value="<%= lesson.sort %>" type="text" class="form-control" name="sort" id="sort" aria-describedby="emailHelp"  >
-            <label for="exampleInputEmail1">Description</label>
-            <textarea class="form-control" name="description"  id="description" rows="3"><%= lesson.description %></textarea>
+  <% lessons.forEach(function(lesson){ %>
+
+    <% if(!isAdmin) { %>
+
+      <!-- Project One -->
+          <div class="row">
+            <div class="col-md-7">
+                <iframe class="embed-responsive-item" src="<%= lesson.url %>" allowfullscreen></iframe>
+            </div>
+            <div class="col-md-5">
+              <h3><%= lesson.title %></h3>
+              <p><%= lesson.description %></p>
+              <p>Posted <%= moment(lesson.createdAt).format('MMMM Do YYYY'); %></p>
+            </div>
           </div>
-          <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Save Lesson</button>
-          </div>
-        </form>
-        <div class="card-footer">
+          <!-- /.row -->
+
+    <% } else { %>
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
           <form method="POST" action="/lessons/<%= lesson._id %>">
-            <input type="hidden" name="_method" value="delete" />
-              <button type="submit" class="btn btn-danger">Delete Lesson</button>
-            </form>
+            <input type="hidden" name="_method" value="put" />
+            <div class="card-img-top embed-responsive embed-responsive-16by9">
+              <iframe class="embed-responsive-item" src="<%= lesson.url %>" allowfullscreen></iframe>
+            </div>
+
+            <div class="card-body">
+              <label for="exampleInputEmail1">URL</label>
+              <input value="<%= lesson.url %>" type="text" class="form-control" name="url" id="url" aria-describedby="emailHelp">
+              <label for="exampleInputEmail1">Title</label>
+              <input value="<%= lesson.title %>" type="text" class="form-control" name="title" id="title" aria-describedby="emailHelp" placeholder="Enter title" >
+              <label for="exampleInputEmail1">Sort Order</label>
+              <input value="<%= lesson.sort %>" type="text" class="form-control" name="sort" id="sort" aria-describedby="emailHelp"  >
+              <label for="exampleInputEmail1">Description</label>
+              <textarea class="form-control" name="description"  id="description" rows="3"><%= lesson.description %></textarea>
+            </div>
+            <div class="card-footer">
+              <button type="submit" class="btn btn-primary">Save Lesson</button>
+            </div>
+          </form>
+          <div class="card-footer">
+            <form method="POST" action="/lessons/<%= lesson._id %>">
+              <input type="hidden" name="_method" value="delete" />
+                <button type="submit" class="btn btn-danger">Delete Lesson</button>
+              </form>
+          </div>
         </div>
       </div>
-    </div>
-  <% }  %>
+    <% }  %>
 
 
-<% }) %>
+  <% }) %>
+  </div>
+
 </div>
