@@ -601,9 +601,9 @@ pre code {
     max-width: 720px;
   }
 }
-@media (min-width: 992px) {
+@media (min-width: 900px) {
   .container-lg, .container-md, .container-sm, .container {
-    max-width: 960px;
+    max-width: 1000px;
   }
 }
 @media (min-width: 1200px) {
@@ -9997,6 +9997,10 @@ hr.light {
   padding: 8rem 0;
 }
 
+.lessons-header {
+    padding: 8rem 0 2.5rem;
+}
+
 #mainNav {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   background-color: #343a40;
@@ -10094,7 +10098,11 @@ header.masthead h1 {
   }
 }
 
-#portfolio .container-fluid, #portfolio .container-sm, #portfolio .container-md, #portfolio .container-lg, #portfolio .container-xl {
+.middle {
+  min-height: calc(100vh - 265px);
+}
+
+#portfolio .©-fluid, #portfolio .©-sm, #portfolio .container-md, #portfolio .container-lg, #portfolio .container-xl {
   max-width: 1920px;
 }
 #portfolio .container-fluid .portfolio-box, #portfolio .container-sm .portfolio-box, #portfolio .container-md .portfolio-box, #portfolio .container-lg .portfolio-box, #portfolio .container-xl .portfolio-box {
@@ -10137,10 +10145,14 @@ header.masthead h1 {
 /* Small devices (landscape phones, less than 768px)*/
 @media (max-width: 767.98px) {
 .code-crush {
-    width: 100%;
+    width: 233px;
+    padding-top: 10px;
+  }
+
+  .middle {
+    min-height: calc(100vh - 370px);
   }
 }
-
 .footer > .container {
   padding-right: 15px;
   padding-left: 15px;
