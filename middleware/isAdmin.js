@@ -1,6 +1,9 @@
 let admins = [
   "brandon@pixegon.com",
-  "cashley@cultivatecoders.com"
+  "cashley@cultivatecoders.com",
+  "jordan@cultivatecoders.com",
+  "dtenorio.work@gmail.com",
+  "will.farmerie@gmail.com"
 ];
 
 module.exports = {
