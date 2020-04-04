@@ -1,28 +1,42 @@
+<script>
+  function togglestream() {
+    let ele = document.getElementById('lesson-stream');
+    ele.style.display = '';
+  }
+</script>
 <!-- Masthead-->
 <section class="page-section bg-dark lessons-header" id="sign-in">
-    <div class="container">
-        <div class="row justify-content-center">
-            <h2 class="text-white mt-0">Lessons</h2>
-        </div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <h2 class="text-white mt-0">Lessons</h2>
     </div>
+  </div>
 </section>
 
 <div class="container middle">
+  <div id="lesson-stream" class="row jumbotron" style="margin-top:20px; display:none">
+    <h1 class="display-4">Streaming live every day at 10am starting April 6, 2020 - May 1st 2020</h1>
+    <div class="embed-responsive embed-responsive-16by9">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/oNJGMnaGJyQ&autoplay=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
+
   <% if(lessons.length === 0) { %>
-    <div class="row text-center">
-      <div class="col-lg-12 col-md-12 mb-12">
-        <div class="alert alert-warning mb-4 mt-4">
-          <strong>Lessons coming soon!</strong>
-          <p>Your spot is secured! Join us every day at 10am starting April 6, 2020 - May 1st 2020.</p>
-          <p>Missed a lesson? All lessons will be recorded and will show up here after they have concluded.</p>
-        </div>
+  <div class="row text-center">
+    <div class="col-lg-12 col-md-12 mb-12">
+      <div class="alert alert-warning mb-4 mt-4">
+        <strong>Lessons coming soon!</strong>
+        <p>Your spot is secured! Join us every day at 10am starting April 6, 2020 - May 1st 2020.</p>
+        <p>Missed a lesson? All lessons will be recorded and will show up here after they have <a href="#" onclick="togglestream();return false;">concluded.</a></p>
       </div>
     </div>
+    <button type="button" class="btn btn-primary">Watch Now</button>
+  </div>
   <% } %>
 
   <% if(isAdmin) { %>
-    <div class="row text-left">
-      <div class="col-lg-6 col-md-4 mb-4">
+  <div class="row text-left">
+    <div class="col-lg-6 col-md-4 mb-4">
       <form method="post" action="/lessons" novalidate>
         <div class="form-group">
           <label for="exampleInputEmail1">Title</label>
@@ -31,47 +45,47 @@
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">URL</label>
-          <input type="text" class="form-control" name="url"  id="url" placeholder="URL of embed">
+          <input type="text" class="form-control" name="url" id="url" placeholder="URL of embed">
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">Sort Order</label>
-          <input type="number" class="form-control" name="sort"  id="sort" placeholder="Sort order">
+          <input type="number" class="form-control" name="sort" id="sort" placeholder="Sort order">
           <small id="emailHelp" class="form-text text-muted">This is a numeric value</small>
         </div>
         <div class="form-group">
           <label for="exampleFormControlTextarea1">Description</label>
-          <textarea class="form-control" name="description"  id="description" rows="3"></textarea>
+          <textarea class="form-control" name="description" id="description" rows="3"></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Add Lesson</button>
       </form>
-      </div>
     </div>
+  </div>
   <% } %>
 
   <% if(!isAdmin) { %>
-    <div class="row text-center">
-  <% } else { %>
+  <div class="row text-center">
+    <% } else { %>
     <div class="row text-left">
-  <% } %>
+      <% } %>
 
-  <% lessons.forEach(function(lesson){ %>
+      <% lessons.forEach(function(lesson){ %>
 
-    <% if(!isAdmin) { %>
+      <% if(!isAdmin) { %>
 
       <!-- Project One -->
-          <div class="row">
-            <div class="col-md-7">
-                <iframe class="embed-responsive-item" src="<%= lesson.url %>" allowfullscreen></iframe>
-            </div>
-            <div class="col-md-5">
-              <h3><%= lesson.title %></h3>
-              <p><%= lesson.description %></p>
-              <p>Posted <%= moment(lesson.createdAt).format('MMMM Do YYYY'); %></p>
-            </div>
-          </div>
-          <!-- /.row -->
+      <div class="row">
+        <div class="col-md-7">
+          <iframe class="embed-responsive-item" src="<%= lesson.url %>" allowfullscreen></iframe>
+        </div>
+        <div class="col-md-5">
+          <h3><%= lesson.title %></h3>
+          <p><%= lesson.description %></p>
+          <p>Posted <%= moment(lesson.createdAt).format('MMMM Do YYYY'); %></p>
+        </div>
+      </div>
+      <!-- /.row -->
 
-    <% } else { %>
+      <% } else { %>
       <div class="col-lg-3 col-md-6 mb-4">
         <div class="card h-100">
           <form method="POST" action="/lessons/<%= lesson._id %>">
@@ -84,11 +98,11 @@
               <label for="exampleInputEmail1">URL</label>
               <input value="<%= lesson.url %>" type="text" class="form-control" name="url" id="url" aria-describedby="emailHelp">
               <label for="exampleInputEmail1">Title</label>
-              <input value="<%= lesson.title %>" type="text" class="form-control" name="title" id="title" aria-describedby="emailHelp" placeholder="Enter title" >
+              <input value="<%= lesson.title %>" type="text" class="form-control" name="title" id="title" aria-describedby="emailHelp" placeholder="Enter title">
               <label for="exampleInputEmail1">Sort Order</label>
-              <input value="<%= lesson.sort %>" type="text" class="form-control" name="sort" id="sort" aria-describedby="emailHelp"  >
+              <input value="<%= lesson.sort %>" type="text" class="form-control" name="sort" id="sort" aria-describedby="emailHelp">
               <label for="exampleInputEmail1">Description</label>
-              <textarea class="form-control" name="description"  id="description" rows="3"><%= lesson.description %></textarea>
+              <textarea class="form-control" name="description" id="description" rows="3"><%= lesson.description %></textarea>
             </div>
             <div class="card-footer">
               <button type="submit" class="btn btn-primary">Save Lesson</button>
@@ -97,15 +111,15 @@
           <div class="card-footer">
             <form method="POST" action="/lessons/<%= lesson._id %>">
               <input type="hidden" name="_method" value="delete" />
-                <button type="submit" class="btn btn-danger">Delete Lesson</button>
-              </form>
+              <button type="submit" class="btn btn-danger">Delete Lesson</button>
+            </form>
           </div>
         </div>
       </div>
-    <% }  %>
+      <% }  %>
 
 
-  <% }) %>
+      <% }) %>
+    </div>
+
   </div>
-
-</div>
