@@ -1,3 +1,4 @@
+
 <!-- Masthead-->
 <section class="page-section bg-dark lessons-header" id="sign-in">
   <div class="container">
@@ -24,14 +25,14 @@
 
   <div id="lesson-stream" class="row jumbotron" style="margin-top:20px;">
     <h1 class="display-4">Streaming live every day at 10am April 6, 2020 - May 1st 2020</h1>
-    <div class="embed-responsive embed-responsive-16by9">
-      <iframe
+    <div class="embed-responsive embed-responsive-16by9" id="twitch-embed">
+      <!-- <iframe
         height="720"
         width="1280"
         src="https://player.twitch.tv/?channel=codecrushcrew&autoplay=true"
         frameborder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe>
+        allowfullscreen></iframe> -->
     </div>
   </div>
 
@@ -124,3 +125,19 @@
     </div>
 
   </div>
+
+  <!-- Load the Twitch embed script -->
+      <script src="https://embed.twitch.tv/embed/v1.js"></script>
+
+      <!-- Create a Twitch.Embed object that will render within the "twitch-embed" root element. -->
+      <script type="text/javascript">
+        new Twitch.Embed("twitch-embed", {
+          width: 1280,
+          height: 720,
+          channel: "codecrushcrew",
+          allowfullscreen: true,
+          autoplay: true,
+          // only needed if your site is also embedded on embed.example.com and othersite.example.com
+          parent: ["codecrushcrew.com"]
+        });
+      </script>
