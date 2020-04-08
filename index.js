@@ -33,7 +33,7 @@ mongoose.connect(process.env.MONGO_DB_URL, {
 // Configure cooke session for express
 app.use(express.static('public'));
 app.use(cookieSession({
-  maxAge: 24 * 60 * 60 * 1000, // One day in milliseconds
+  maxAge: 24 * 60 * 60 * 1000 * 30, // One day in milliseconds
   keys: ['yum cookies are good']
 }));
 // Used to initialize passport
@@ -191,7 +191,7 @@ app.get('/login', (req, res) => {
   if(req.user) {
     res.redirect('/lessons');
   } else {
-    res.render('login.ejs',{title: "Login", user: req.user});
+    res.redirect('/auth/swoop');
   }
 });
 
