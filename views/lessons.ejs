@@ -3,7 +3,7 @@
 <section class="page-section bg-dark lessons-header" id="sign-in">
   <div class="container">
     <div class="row justify-content-center">
-      <h2 class="text-white mt-0">Lessons</h2>
+
     </div>
   </div>
 </section>
@@ -26,13 +26,6 @@
   <div id="lesson-stream" class="row jumbotron" style="margin-top:20px;">
     <h1 class="display-4">Streaming live every day at 10am April 6, 2020 - May 1st 2020</h1>
     <div class="embed-responsive embed-responsive-16by9" id="twitch-embed">
-      <!-- <iframe
-        height="720"
-        width="1280"
-        src="https://player.twitch.tv/?channel=codecrushcrew&autoplay=true"
-        frameborder="0"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe> -->
     </div>
   </div>
 
@@ -64,8 +57,9 @@
   </div>
   <% } %>
 
+  <h1>Previous Lessons</h1>
   <% if(!isAdmin) { %>
-  <div class="row text-center">
+    <div>
     <% } else { %>
     <div class="row text-left">
       <% } %>
@@ -76,10 +70,10 @@
 
       <!-- Project One -->
       <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-4">
           <iframe class="embed-responsive-item" src="<%= lesson.url %>" allowfullscreen></iframe>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-8">
           <h3><%= lesson.title %></h3>
           <p><%= lesson.description %></p>
           <p>Posted <%= moment(lesson.createdAt).format('MMMM Do YYYY'); %></p>
