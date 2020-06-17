@@ -5,7 +5,8 @@ let admins = [
   "dtenorio.work@gmail.com",
   "will.farmerie@gmail.com",
   "mayaa0511@gmail.com",
-  "carolinesue505@gmail.com"
+  "carolinesue505@gmail.com",
+  "carl.marq95@gmail.com"
 ];
 
 module.exports = {
